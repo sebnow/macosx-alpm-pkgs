@@ -1,5 +1,6 @@
 # Maintainer: Aaron Griffin <aaron@archlinux.org>
 # Maintainer: Dan McGee <dan@archlinux.org>
+# Contributer: Sebastian Nowicki <sebnow@gmail.com>
 
 pkgname=pacman
 pkgver=3.2.1
