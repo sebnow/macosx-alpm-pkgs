@@ -1,0 +1,17 @@
+# Contributer: Sebastian Nowicki <sebnow@gmail.com>
+
+pkgname=osx
+pkgver=10.5
+pkgrel=1
+pkgdesc="Dummy package providing information about what Mac OS X provides"
+arch=('i6386' 'x86_64')
+url="http://www.apple.com/mac"
+license=('None')
+provides=('bash' 'zsh')
+source=()
+md5sums=()
+
+build() {
+}
+
+# vim: set ts=2 sw=2 et:
