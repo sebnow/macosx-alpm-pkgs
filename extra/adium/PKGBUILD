@@ -1,0 +1,23 @@
+# Contributor: Sebastian Nowicki <sebnow@gmail.com>
+
+pkgname=Adium
+pkgver=1.3.2
+pkgrel=1
+pkgdesc="A free instant messaging application for Mac OS X"
+arch=('i386' 'x86_64')
+url="http://www.adiumx.com/"
+license=('GPL')
+source=("http://adiumx.cachefly.net/${pkgname}_$pkgver.dmg")
+noextract=("$pkgname-$pkgver.dmg")
+md5sums=('7dcef4fdd39f65aece0df318a736d410')
+
+build() {
+	hdiutil attach -noverify -mountpoint "$srcdir/$pkgname-$pkgver" \
+		"$srcdir/$pkgname-$pkgver.dmg" || return 1
+
+	mkdir -p "$pkgdir/Applications"
+	cp -R "$srcdir/$pkgname-$pkgver/$pkgname.app" \
+		"$pkgdir/Applications/$pkgname.app"
+
+	hdiutil detach "$srcdir/$pkgname-$pkgver"
+}
