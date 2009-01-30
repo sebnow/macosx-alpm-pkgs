@@ -1,0 +1,35 @@
+# Contributor: Sebastian Nowicki <sebnow@gmail.com>
+
+pkgname=Transmission
+pkgver=1.42
+pkgrel=1
+pkgdesc="A fast, easy, and free multi-platform BitTorrent client."
+arch=('i386' 'x86_64')
+url="http://www.transmissionbt.com/"
+license=('MIT' 'GPL')
+groups=()
+depends=()
+makedepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+source=("http://mirrors.m0k.org/transmission/files/$pkgname-$pkgver.dmg")
+noextract=("$pkgname-$pkgver.dmg")
+md5sums=('c5fb8b272007a4742112b8e8cb489539')
+
+build() {
+	hdiutil attach -noverify -mountpoint "$srcdir/$pkgname-$pkgver" \
+		"$srcdir/$pkgname-$pkgver.dmg" || return 1
+
+	mkdir -p "$pkgdir/Applications"
+	cp -R "$srcdir/$pkgname-$pkgver/$pkgname.app" \
+		"$pkgdir/Applications/$pkgname.app"
+
+	hdiutil detach "$srcdir/$pkgname-$pkgver"
+}
+
+# vim:set ts=2 sw=2 et:
