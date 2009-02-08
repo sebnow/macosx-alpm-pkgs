@@ -1,0 +1,24 @@
+# Based on the PKGBUILD from Archlinux
+# Original contributers:
+# Contributer: Dan McGee <dan@archlinux.org>
+# Contributer: Aaron Griffin <aaron@archlinux.org>
+#
+# Maintainer: Sebastian Nowicki <sebnow@gmail.com>
+pkgname='libarchive'
+pkgver=2.6.1
+pkgrel=1
+pkgdesc="library that can create and read several streaming archive formats"
+arch=('i386' 'x86_64')
+url="http://people.freebsd.org/~kientzle/libarchive/"
+license=('BSD')
+groups=('base')
+depends=('zlib' 'bzip2' 'acl')
+source=("http://libarchive.googlecode.com/files/$pkgname-$pkgver.tar.gz")
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  ./configure --prefix=/usr/local || return 1
+
+  make || return 1
+  make DESTDIR="$pkgdir" install || return 1
+}
