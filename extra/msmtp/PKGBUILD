@@ -1,0 +1,26 @@
+# Contributor: Sebastian Nowicki <sebnow@gmail.com>
+pkgname=msmtp
+pkgver=1.4.17
+pkgrel=1
+pkgdesc="a mini smtp client"
+arch=('i386' 'x86_64')
+license=('GPL2')
+url="http://msmtp.sourceforge.net"
+depends=('openssl' 'libidn')
+makedepends=('gzip')
+provides=('smtp-forwarder')
+source=("http://download.sourceforge.net/sourceforge/msmtp/$pkgname-$pkgver.tar.bz2")
+md5sums=('b0b74f1144812b60688f590c62a0d3dd')
+install="msmtp.install"
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  ./configure --prefix=/usr/local --sysconfdir=/etc --with-ssl=openssl \
+		--with-macosx-keyring || return 1
+  make || return 1
+  make DESTDIR="$pkgdir" install
+	rm "$pkgdir/usr/local/share/info/dir"
+	gzip "$pkgdir/usr/local/share/info/$pkgname.info"
+}
+
+# vim:set ts=2 sw=2 et:
