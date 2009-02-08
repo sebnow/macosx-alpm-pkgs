@@ -1,0 +1,21 @@
+# Contributor: Sebastian Nowicki <sebnow@gmail.com>
+pkgname=docutils
+pkgver=0.5
+pkgrel=1
+pkgdesc="A system for processing plaintext documentation into useful formats"
+arch=('any')
+url="http://docutils.sourceforge.net"
+license=('custom')
+depends=('python')
+source=("http://prdownloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.gz?download")
+md5sums=('dd72dac92fc8e3eb0f48c3effeef80f6')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+	python setup.py install --root "$pkgdir" || return 1
+	mkdir -p "$pkgdir/usr/local/share/licenses/$pkgname/"
+	install -m 644 COPYING.txt "$pkgdir/usr/local/share/licenses/$pkgname/LICENSE"
+  install -m 644 licenses/python* "$pkgdir/usr/local/share/licenses/$pkgname/"
+}
+
+# vim:set ts=2 sw=2 et:
