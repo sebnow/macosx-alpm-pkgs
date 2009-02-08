@@ -1,0 +1,20 @@
+# Contributor: Sebastian Nowicki <sebnow@gmail.com>
+pkgname=python-sphinx
+pkgver=0.5
+pkgrel=2
+pkgdesc="Python documentation generator"
+arch=('any')
+url="http://sphinx.pocoo.org/"
+license=('GPL')
+depends=('python>=2.4' 'pygments=>0.8' 'docutils>=0.4' 'python-jinja2>=2.0')
+makedepends=('setuptools')
+source=("http://pypi.python.org/packages/source/S/Sphinx/Sphinx-$pkgver.tar.gz")
+md5sums=('55a33cc13b5096c8763cd4a933b30ddc')
+
+build() {
+    cd "$srcdir/Sphinx-$pkgver"
+    python setup.py build
+    python setup.py install --root="$pkgdir"
+}
+
+# vim:set ts=2 sw=2 et:
