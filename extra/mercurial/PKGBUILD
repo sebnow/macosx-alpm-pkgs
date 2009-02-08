@@ -1,0 +1,22 @@
+# Contributor: Sebastian Nowicki <sebnow@gmail.com>
+pkgname=mercurial
+pkgver=1.1.2
+pkgrel=1
+pkgdesc="A fast, lightweight Source Control Management system"
+arch=('any')
+url="http://www.selenic.com/mercurial"
+license=('GPL2')
+depends=('python')
+source=("http://www.selenic.com/$pkgname/release/$pkgname-$pkgver.tar.gz")
+md5sums=('4fd3b9a2e5dcd025840c3849b136bec8')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+	python setup.py build || return 1
+	python setup.py install --root="$pkgdir" || return 1
+	make -C doc || return 1
+	make -C doc DESTDIR="$pkgdir" install || return 1
+}
+
+# vim:set ts=2 sw=2 et:
+
