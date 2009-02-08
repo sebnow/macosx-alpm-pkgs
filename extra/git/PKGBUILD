@@ -1,0 +1,37 @@
+# Contributor: Sebastian Nowicki <sebnow@gmail.com>
+pkgname=git
+pkgver=1.6.1
+pkgrel=1
+pkgdesc="An open source, distributed version control system"
+arch=('i386' 'x86_64')
+url="http://git.or.cz/"
+license=('GPL2')
+depends=('curl' 'expat>=2.0' 'perl-error' 'perl>=5.10.0' 'openssl' 'zlib' 'ssh')
+optdepends=('perl-libwww: git svn'
+            'perl-term-readkey: git svn'
+            'subversion: git svn'
+            'cvsps: git cvsimport')
+source=("http://kernel.org/pub/software/scm/git/${pkgname}-${pkgver}.tar.bz2" \
+        "http://kernel.org/pub/software/scm/git/git-manpages-${pkgver}.tar.bz2")
+md5sums=('66265d85593473b23290232b9dccef77'
+         'f53f454c397f691ad50ca6657b56d35c')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+	make prefix=/usr/local gitexecdir=/usr/local/lib/git-core \
+		NO_TCLTK=1 NO_R_TO_GCC_LINKER=1 NO_FUNK=1 NO_DARWIN_PORTS=1 || return 1
+	make 	prefix=/usr/local gitexecdir=/usr/local/lib/git-core \
+		NO_TCLTK=1 NO_R_TO_GCC_LINKER=1 NO_FUNK=1 NO_DARWIN_PORTS=1 \
+		INSTALLDIRS=vendor DESTDIR="$pkgdir" install || return 1
+
+  mkdir -p "$pkgdir/etc/bash_completion.d/"
+  install -m644 ./contrib/completion/git-completion.bash "$pkgdir/etc/bash_completion.d/git" || return 1
+
+	mkdir -p "$pkgdir/usr/local/share/man/man"{1,5,7}
+	cp -R "$srcdir/man"{1,5,7} "$pkgdir/usr/local/share/man/"
+
+	rm -rf "$pkgdir/usr/local/System/"
+}
+
+
+# vim:set ts=2 sw=2 et:
