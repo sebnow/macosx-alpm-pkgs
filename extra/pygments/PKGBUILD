@@ -1,0 +1,19 @@
+# Contributor: Sebastian Nowicki <sebnow@gmail.com>
+
+pkgname=pygments
+pkgver=1.0
+pkgrel=1
+pkgdesc="Python syntax highlighter"
+arch=('any')
+url="http://pygments.org/"
+license=('GPL')
+depends=('python' 'setuptools')
+source=("http://pypi.python.org/packages/source/P/Pygments/Pygments-$pkgver.tar.gz")
+md5sums=('70c40ff5331460cabfcb24f86a8d451d')
+
+build() {
+  cd "$srcdir/Pygments-$pkgver"
+  python setup.py install --root="$pkgdir" || return 1
+	mkdir -p "$pkgdir/usr/local/share/licenses/$pkgname/"
+	install -m 644 LICENSE "$pkgdir/usr/local/share/licenses/$pkgname/LICENSE"
+}
