@@ -1,0 +1,19 @@
+# Contributor: Sebastian Nowicki <sebnow@gmail.com>
+pkgname=python-jinja2
+pkgver=2.1.1
+pkgrel=1
+pkgdesc="A small but fast and easy to use stand-alone template engine"
+arch=('any')
+license=("BSD")
+url="http://jinja.pocoo.org/2/"
+depends=('python>=2.5')
+makedepends=('setuptools')
+source=("http://pypi.python.org/packages/source/J/Jinja2/Jinja2-$pkgver.tar.gz")
+md5sums=('b37fc262e4f613eec57c3defe6aea97c')
+
+build() {
+  cd "$srcdir/Jinja2-$pkgver"
+  python setup.py install --root="$pkgdir" || return 1
+}
+
+# vim:set ts=2 sw=2 et:
