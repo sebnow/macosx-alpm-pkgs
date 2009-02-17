@@ -1,0 +1,25 @@
+# Contributor: Sebastian Nowicki <sebnow@gmail.com>
+
+pkgname=vlc
+pkgver=0.9.8a
+pkgrel=1
+pkgdesc="The cross-platform media player and streaming server."
+arch=('i386' 'x86_64')
+url="http://www.videolan.org/vlc/"
+license=('GPL')
+source=("http://www.videolan.org/mirror-geo.php?file=$pkgname/$pkgver/macosx/$pkgname-$pkgver.dmg")
+noextract=("$pkgname-$pkgver.dmg")
+md5sums=('b10fbe8cb8385b9072db56fe112256bc')
+
+build() {
+	hdiutil attach -noverify -mountpoint "$srcdir/$pkgname-$pkgver" \
+		"$srcdir/$pkgname-$pkgver.dmg" > /dev/null || return 1
+
+	mkdir -p "$pkgdir/Applications"
+	cp -R "$srcdir/$pkgname-$pkgver/$pkgname.app" \
+		"$pkgdir/Applications/$pkgname.app"
+
+	hdiutil detach "$srcdir/$pkgname-$pkgver"
+}
+
+# vim:set ts=2 sw=2 et:
