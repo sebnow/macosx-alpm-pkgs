@@ -1,0 +1,35 @@
+# Contributor: Sebastian Nowicki <sebnow@gmail.com>
+
+pkgname=firefox
+pkgver=3.0.6
+pkgrel=1
+pkgdesc="Standalone web browser from mozilla.org."
+arch=('i386' 'x86_64')
+url="http://www.mozilla.com/projects/firefox"
+license=('MPL' 'GPL' 'LGPL')
+groups=()
+depends=()
+makedepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+source=("http://releases.mozilla.org/pub/mozilla.org/$pkgname/releases/$pkgver/mac/en-US/${pkgname/f/F}%20$pkgver.dmg")
+noextract=("$pkgname $pkgver.dmg")
+md5sums=('4e79421d69d791ee52e92866fc58bd6a')
+
+build() {
+	hdiutil attach -noverify -mountpoint "$srcdir/$pkgname-$pkgver" \
+		"$srcdir/$pkgname%20$pkgver.dmg" > /dev/null || return 1
+
+	mkdir -p "$pkgdir/Applications"
+	cp -R "$srcdir/$pkgname-$pkgver/$pkgname.app" \
+		"$pkgdir/Applications/$pkgname.app"
+
+	hdiutil detach "$srcdir/$pkgname-$pkgver"
+}
+
+# vim:set ts=2 sw=2 et:
