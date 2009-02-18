@@ -1,0 +1,25 @@
+# Contributor: Sebastian Nowicki <sebnow@gmail.com>
+# This package is based on the Archlinux PKGBUILD, written by:
+# Contributor: Vesa Kaihlavirta <vesa@archlinux.org>
+# Contributor: Roman Cheplyaka <roma@ro-che.info>
+pkgname=libedit
+pkgver=20080712_2.11
+pkgrel=1
+pkgdesc="Berkeley-style licensed command line editor library"
+arch=('i386' 'x86_64')
+url="http://www.thrysoee.dk/editline/"
+license=('BSD')
+source=("http://www.thrysoee.dk/editline/$pkgname-${pkgver/_/-}.tar.gz")
+options=(!libtool)
+md5sums=('140c56efbc68d7255b7045eb604e8a45')
+
+build() {
+  cd "$srcdir/$pkgname-${pkgver/_/-}"
+  ./configure --prefix=/usr/local
+  make || return 1
+  make prefix="$pkgdir/usr/local" install
+
+  mv "$pkgdir/usr/local/share/man/man3/editline.3" "$pkgdir/usr/local/share/man/man3/el.3"
+	mkdir -p "$pkgdir/usr/local/share/licenses/$pkgname/"
+  cp COPYING "$pkgdir/usr/local/share/licenses/$pkgname/LICENSE"
+}
