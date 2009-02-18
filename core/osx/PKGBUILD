@@ -1,13 +1,14 @@
 # Contributer: Sebastian Nowicki <sebnow@gmail.com>
 
 pkgname=osx
-pkgver=10.5
+pkgver=10.5.6
 pkgrel=1
 pkgdesc="Dummy package providing information about what Mac OS X provides"
 arch=('i386' 'x86_64')
 url="http://www.apple.com/mac"
 license=('None')
-provides=('bash' 'zsh' 'python=2.5' 'setuptools')
+provides=('bash' 'zsh' 'python=2.5' 'setuptools=0.6c7' 'bzip2=1.0.4'
+          'zlib=1.2.3' 'perl=5.8.8' 'texinfo=4.8')
 source=()
 md5sums=()
 
