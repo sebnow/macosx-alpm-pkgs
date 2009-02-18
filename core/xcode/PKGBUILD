@@ -1,0 +1,19 @@
+# Contributer: Sebastian Nowicki <sebnow@gmail.com>
+
+pkgname=xcode
+pkgver=3.1.2
+pkgrel=1
+pkgdesc="Apple's premiere development environment for Mac OS X."
+arch=('i386' 'x86_64')
+url="http://developer.apple.com/TOOLS/xcode/"
+license=('None')
+provides=('gcc=4.0.1' 'gcc-libs' 'subversion=1.4.4' 'interface-builder=3.1.2'
+          'instruments=1.5' 'dashcode=2.0.1')
+source=()
+md5sums=()
+
+build() {
+	return 0
+}
+
+# vim: set ts=2 sw=2 et:
