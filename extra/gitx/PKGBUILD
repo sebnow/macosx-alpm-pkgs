@@ -1,0 +1,22 @@
+# Contributor: Sebastian Nowicki <sebnow@gmail.com>
+
+pkgname=GitX
+pkgver=0.6.1
+pkgrel=1
+pkgdesc="A git GUI specifically for Mac OS X."
+arch=('i386' 'x86_64')
+url="http://www.gitx.frim.nl/"
+license=('GPL2')
+source=("http://frim.frim.nl/${pkgname}Stable.app.zip")
+md5sums=('0d580768d1279e97ac6b8d18c169a452')
+
+build() {
+	mkdir -p "$pkgdir/Applications"
+	cp -R "$srcdir/$pkgname.app" "$pkgdir/Applications/$pkgname.app"
+	# Install the command line helper
+	mkdir -p "$pkgdir/usr/local/bin/"
+	install -m755 "$pkgdir/Applications/$pkgname.app/Contents/Resources/gitx" \
+		"$pkgdir/usr/local/bin/gitx"
+}
+
+# vim:set ts=2 sw=2 et:
