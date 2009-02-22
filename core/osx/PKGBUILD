@@ -8,7 +8,8 @@ arch=('i386' 'x86_64')
 url="http://www.apple.com/mac"
 license=('None')
 provides=('bash' 'zsh' 'python=2.5' 'setuptools=0.6c7' 'bzip2=1.0.4'
-          'zlib=1.2.3' 'perl=5.8.8' 'texinfo=4.8')
+          'zlib=1.2.3' 'perl=5.8.8' 'texinfo=4.8' 'curl=7.16.3'
+          'ncurses=5.4')
 source=()
 md5sums=()
 

@@ -1,0 +1,27 @@
+# Contributor: Sebastian Nowicki <sebnow@gmail.com>
+# This package is based on the Archlinux PKGBUILD, written by:
+# Maintainer: Vesa Kaihlavirta <vesa@archlinux.org>
+# Contributor: Simo Leone <neotuli@gmail.com>
+
+pkgname=darcs
+pkgver=2.2.0
+pkgrel=1
+pkgdesc="Decentralized replacement for CVS with roots in quantum mechanics"
+arch=('i386' 'x86_64')
+url="http://darcs.net/"
+license=('GPL')
+depends=('curl' 'gmp' 'ncurses>=5.6-7')
+makedepends=('ghc')
+optdepends=("gnupg: patch signing" "postfix: patch sending via email")
+source=("http://darcs.net/$pkgname-$pkgver.tar.gz")
+md5sums=('8f0a5eba5971e7cf324c63664cde59e2')
+
+build() {
+    cd "$srcdir/$pkgname-$pkgver"
+    ./configure --prefix=/usr/local --sysconfdir=/etc \
+			--with-sendmail=sendmail || return 1
+    make || return 1
+    make DESTDIR="$pkgdir" install
+}
+
+# vim: set ts=2 sw=2 et:
