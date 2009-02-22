@@ -1,0 +1,22 @@
+# Contributor: Sebastian Nowicki <sebnow@gmail.com
+pkgname=haskell-alex
+pkgver=2.3.1
+pkgrel=1
+pkgdesc='a lexical analyser generator for Haskell'
+url='http://www.haskell.org/alex/'
+license=('custom:BSD3')
+arch=('i386' 'x86_64')
+depends=('ghc' 'haskell-cabal')
+source=("http://hackage.haskell.org/packages/archive/alex/$pkgver/alex-$pkgver.tar.gz")
+md5sums=('a8c26af3370388297cee4b8c767d72d9')
+
+build() {
+  cd "$srcdir/alex-$pkgver"
+  runhaskell Setup configure --prefix=/usr/local || return 1
+  runhaskell Setup build || return 1
+  runhaskell Setup copy --destdir="$pkgdir" || return 1
+  mkdir -p "$pkgdir/usr/local/share/licenses/$pkgname/"
+  install -m644 LICENSE "$pkgdir/usr/local/share/licenses/$pkgname/LICENSE" || return 1
+}
+
+# vim:set ts=2 sw=2 et:
