@@ -1,3 +1,8 @@
-*
-!PKGBUILD
-!*.install
+*.tar.gz
+pkg/
+src/
+*.zip
+*.dmg
+*.tar.gz
+*.tar.bzip2
+*.part
