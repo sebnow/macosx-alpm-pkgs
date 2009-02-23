@@ -1,0 +1,26 @@
+# Contributor: Sebastian Nowicki <sebnow@gmail.com>
+# This package is based on the Archlinux PKGBUILD, written by:
+# Contributor: simo <simo@archlinux.org>
+# Contributor: Vesa Kaihlavirta <vegai@iki.fi>
+
+pkgname=happy
+pkgver=1.18.2
+pkgrel=1
+pkgdesc="The Parser Generator for Haskell"
+url="http://www.haskell.org/happy/"
+arch=('i386' 'x86_64')
+license=("BSD")
+depends=('gmp' 'bash' 'haskell98')
+source=("http://hackage.haskell.org/packages/archive/$pkgname/$pkgver/$pkgname-$pkgver.tar.gz")
+md5sums=('adb1679a1fa8cec74a6e621a4a277e98')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  runhaskell Setup configure --ghc --prefix=/usr/local || return 1
+  runhaskell Setup build || return 1
+  runhaskell Setup copy --copy-prefix="$pkgdir/usr/local"
+  mkdir -p "$pkgdir/usr/local/share/licenses/$pkgname/"
+  install -m644 LICENSE "$pkgdir/usr/local/share/licenses/$pkgname/LICENSE"
+}
+
+# vim:set ts=2 sw=2 et:
